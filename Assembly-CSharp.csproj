@@ -37,6 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\InverseKinematic.cs" />
+     <Compile Include="Assets\Scripts\Math.cs" />
+     <Compile Include="Assets\Scripts\Leg.cs" />
+     <Compile Include="Assets\Scripts\LegEditor.cs" />
+     <None Include="Assets\Data\anim.xml" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

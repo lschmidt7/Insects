@@ -7,12 +7,12 @@ public class InverseKinematic : MonoBehaviour
 
     public Transform[] childs;
 
-    float d;
-    float maxDist;
+    float point_distance;
+    float max_distance;
     float h;
-    float dist;
-    Vector3 pm = Vector3.zero;
+    float current_distance;
 
+    Vector3 mean_point = Vector3.zero;
     Vector3 perp;
     Vector3 dir;
 
@@ -20,27 +20,40 @@ public class InverseKinematic : MonoBehaviour
     {
         childs = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
-        {
             childs[i] = transform.GetChild(i);
-        }
 
-        d = Vector3.Distance(childs[0].position,childs[1].position);
-        maxDist = d * 2;
+        point_distance = Vector3.Distance(childs[0].position,childs[1].position);
+        max_distance = point_distance * 2;
     }
 
     void Update()
     {
-        dist = Vector3.Distance(childs[0].position,childs[2].position);
-        dir = (childs[2].position - childs[0].position).normalized;
-        if(dist > maxDist){
-            childs[2].position = childs[0].position + dir * maxDist;
-            dist = maxDist;
+        current_distance = GetCurrentDistance();
+        dir = GetCurrentDir();
+        if(current_distance > max_distance){
+            childs[2].position = childs[0].position + dir * max_distance;
+            current_distance = max_distance;
         }
 
-        pm = (childs[2].position + childs[0].position) / 2;
-        h = Mathf.Sqrt( d * d - (dist/2) * (dist/2) );
-        perp = Vector3.Cross(dir,Vector3.right).normalized;
-        childs[1].position = pm + perp * h;
+        mean_point = GetMeanPoint();
+        h = Math.Hypotenuse(point_distance, current_distance/2, true);
+        perp = Math.Perpendicular(dir,Vector3.right);
+        childs[1].position = mean_point + perp * h;
+    }
+
+    float GetCurrentDistance()
+    {
+        return Vector3.Distance(childs[2].position, childs[0].position);
+    }
+
+    Vector3 GetCurrentDir()
+    {
+        return (childs[2].position - childs[0].position).normalized;
+    }
+
+    Vector3 GetMeanPoint()
+    {
+        return (childs[2].position + childs[0].position) / 2;
     }
 
     private void OnDrawGizmos() {
@@ -49,8 +62,8 @@ public class InverseKinematic : MonoBehaviour
         {
             Gizmos.DrawLine(childs[i].position,childs[i+1].position);
         }
-        Gizmos.DrawCube(pm,Vector3.one/2);
-        Gizmos.DrawLine(pm,pm+perp*h);
+        Gizmos.DrawCube(mean_point,Vector3.one/2);
+        Gizmos.DrawLine(mean_point,mean_point+perp*h);
         
     }
 
