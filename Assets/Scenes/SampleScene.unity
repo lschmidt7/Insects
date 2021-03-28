@@ -549,11 +549,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94598ce5c919d3f4d9eb6cde31f038ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0
+  delay: 0.449
   frames_count: 0
   frame: 0
-  parts:
-  - {fileID: 497485788}
+  time: 0
+  head: {fileID: 497485788}
+  pos: {x: 0, y: 0, z: 0}
+  move_len: []
+  move_dir: []
 --- !u!1 &1433331751
 GameObject:
   m_ObjectHideFlags: 0
