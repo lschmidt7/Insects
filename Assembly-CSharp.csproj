@@ -36,10 +36,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\LegEditor.cs" />
      <Compile Include="Assets\Scripts\Math.cs" />
      <Compile Include="Assets\Scripts\Leg.cs" />
      <Compile Include="Assets\Scripts\InverseKinematic.cs" />
+     <Compile Include="Assets\Scripts\Knee.cs" />
+     <Compile Include="Assets\Scripts\Foot.cs" />
+     <None Include="Assets\Data\start_pos.xml" />
      <None Include="Assets\Data\move_dir.xml" />
      <None Include="Assets\Data\move_len.xml" />
      <None Include="Assets\Data\anim.xml" />
