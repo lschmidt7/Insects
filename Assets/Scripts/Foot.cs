@@ -22,11 +22,7 @@ public class Foot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        target_pos = articulacao.position + new Vector3(
-            (target_vector.x * articulacao.right).x, 
-            (target_vector.y * articulacao.up).y, 
-            (target_vector.z * articulacao.forward).z
-            );
+        target_pos = articulacao.position;
 
         if(Vector3.Distance(transform.position,target_pos) > 0.3)
         {

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Knee : MonoBehaviour
 {
 
+    public bool right;
+
     public Transform body;
 
     public Transform start;
@@ -32,7 +34,11 @@ public class Knee : MonoBehaviour
         mean = GetMeanPoint();
 
         float h = Math.Hypotenuse(d, d_cur/2, true);
-        Vector3 perp = Math.Perpendicular(dir,body.forward);
+        Vector3 fwd = body.forward;
+        if(right){
+            fwd = -fwd;
+        }
+        Vector3 perp = Math.Perpendicular(dir,fwd);
 
         transform.position = mean + perp * h;
     }
